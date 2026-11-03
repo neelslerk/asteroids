@@ -1,3 +1,4 @@
+from __future__ import annotations
 import pygame
 
 
@@ -15,6 +16,13 @@ class CircleShape(pygame.sprite.Sprite):
         self.position: pygame.Vector2 = pygame.Vector2(x, y)
         self.velocity = pygame.Vector2(0, 0)
         self.radius = radius
+
+    def collides_with(self, other: CircleShape) -> bool:
+        r1 = self.radius
+        r2 = other.radius
+        if (r1 + r2) >= self.position.distance_to(other.position):
+            return True
+        return False
 
     def draw(self, screen: pygame.Surface) -> None:
         # must override
